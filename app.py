@@ -27,9 +27,14 @@ st.markdown('<div class="iso-tag">🛡️ 本系統符合 ISO 9001:2015 (QMS 條
 # 基本資料
 st.markdown('<div class="section-header">一、 基本資料與 ISO 追溯編號</div>', unsafe_allow_html=True)
 
-emp_name = st.text_input("員工姓名*", placeholder="例如：陳大文")
+col_info1, col_info2 = st.columns(2)
+with col_info1:
+    emp_name = st.text_input("員工姓名*", placeholder="例如：陳大文")
+with col_info2:
+    emp_id = st.text_input("員工編號*", placeholder="例如：JO-80123")
+
 project_site = st.text_input("所屬項目／地盤*", placeholder="例如：啟德體育園 A區")
-supervisor = st.text_input("直屬上司*", placeholder="例如：張偉明 工程經理")
+supervisor = st.text_input("直屬上司*", placeholder="例如：張偉明")  # 提示例句已修訂為純姓名
 
 col_m1, col_m2 = st.columns(2)
 with col_m1:
@@ -37,7 +42,7 @@ with col_m1:
 with col_m2:
     sign_date = st.date_input("簽署日期", value=datetime.now())
 
-# ISO 7.5 核實證據編號（新增）
+# ISO 7.5 核實證據編號
 evidence_ref = st.text_input("📂 ISO 7.5 可追溯核實證據單號/文件編號", placeholder="例如：Site-Log-202607-001 / Safety-Audit-A8")
 
 # ==================== DIMENSION 1 ====================
@@ -197,7 +202,7 @@ if st.button("📱 匯出 ISO 合規 PDF 考核報告", type="primary"):
         st.error("請填寫員工姓名！")
     else:
         data = {
-            "emp_name": emp_name, "project_site": project_site, "supervisor": supervisor,
+            "emp_name": emp_name, "emp_id": emp_id if emp_id else "N/A", "project_site": project_site, "supervisor": supervisor,
             "eval_month": eval_month, "sign_date": str(sign_date), "evidence_ref": evidence_ref if evidence_ref else "N/A",
             "scores": {
                 "s1_1": score_1_1, "c1_1_valid": v_calls, "c1_1_ontime": o_calls, "c1_1_rate": rate_1_1,
