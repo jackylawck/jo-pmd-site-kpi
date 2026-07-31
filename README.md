@@ -32,3 +32,10 @@ jo-pmd-site-kpi/
 ├── generate_pdf.py       # ReportLab PDF 報告生成模組 (含 ISO 文件管制與 4 方簽署欄)
 ├── requirements.txt      # Python 套件依賴清單 (reportlab, streamlit, pandas)
 └── README.md             # 專案說明與部署指南
+
+## 🚀 部署至 Streamlit Cloud 指南
+將最新代碼 Commit & Push 至 GitHub 儲存庫 jackylawck/jo-pmd-site-kpi。
+前往 Streamlit Community Cloud 並登入。
+選擇 Repository jo-pmd-site-kpi、main 分支與主程式 app.py。
+點擊 Deploy! 即可完成發布。
+🔗 線上測試網址：https://jo-pmd-site-kpi.streamlit.app
