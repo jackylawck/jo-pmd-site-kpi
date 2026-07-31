@@ -3,7 +3,7 @@ from datetime import datetime
 from generate_pdf import build_pdf
 
 st.set_page_config(
-    page_title="東淦工程 - 地盤 KPI 考核",
+    page_title="東淦工程 - 地盤 KPI 考核 (ISO 合規版)",
     page_icon="🏗️",
     layout="centered"
 )
@@ -17,11 +17,12 @@ st.markdown("""
     .section-header { font-size: 15px; font-weight: bold; color: #FFFFFF; background-color: #1E3A8A; padding: 6px 10px; border-radius: 4px; margin-top: 15px; margin-bottom: 10px; }
     .kpi-card { background-color: #F8FAFC; border: 1px solid #E2E8F0; border-left: 4px solid #0284C7; padding: 10px; border-radius: 4px; font-size: 13px; margin-bottom: 8px; }
     .stButton>button { background-color: #1E3A8A; color: white; font-weight: bold; border-radius: 8px; width: 100%; height: 3.2em; font-size: 16px; }
+    div[data-baseweb="input"] { font-size: 16px !important; }
 </style>
 """, unsafe_allow_html=True)
 
 st.markdown('<div class="pmd-title">東淦工程有限公司 Jumbo Orient Contracting Limited</div>', unsafe_allow_html=True)
-st.markdown('<div class="pmd-subtitle">📱 高級管工 KPI 考核系統</div>', unsafe_allow_html=True)
+st.markdown('<div class="pmd-subtitle">📱 高級管工 KPI 考核系統 (jo-pmd-site-kpi)</div>', unsafe_allow_html=True)
 st.markdown('<div class="iso-tag">🛡️ 本系統符合 ISO 9001:2015 (QMS 條款 7.5 可追溯性) 及 ISO 42001 自動化計算標準 | 文件編號：JO-QMS-KPI-SF01 v2.0</div>', unsafe_allow_html=True)
 
 # 基本資料
@@ -31,10 +32,10 @@ col_info1, col_info2 = st.columns(2)
 with col_info1:
     emp_name = st.text_input("員工姓名*", placeholder="例如：陳大文")
 with col_info2:
-    emp_id = st.text_input("員工編號*", placeholder="例如：JO-80123")
+    emp_id = st.text_input("員工編號*", placeholder="例如：E26001 / W26001")
 
 project_site = st.text_input("所屬項目／地盤*", placeholder="例如：啟德體育園 A區")
-supervisor = st.text_input("直屬上司*", placeholder="例如：張偉明")  # 提示例句已修訂為純姓名
+supervisor = st.text_input("直屬上司*", placeholder="例如：張偉明")
 
 col_m1, col_m2 = st.columns(2)
 with col_m1:
@@ -46,11 +47,11 @@ with col_m2:
 evidence_ref = st.text_input("📂 ISO 7.5 可追溯核實證據單號/文件編號", placeholder="例如：Site-Log-202607-001 / Safety-Audit-A8")
 
 # ==================== DIMENSION 1 ====================
-st.markdown('<div class="section-header">二、 溝通及匯報（20%）</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-header">二、 溝通及匯報（權重 20%）</div>', unsafe_allow_html=True)
 
 # 1.1
 st.markdown("#### 1.1 緊急通訊準時回覆率 (上限 8 分)")
-st.markdown("""<div class="kpi-card"><b>標準：</b>≥95% (8分) | 90-94% (6分) | 85-89% (4分) | 80-84% (2分) | <80% (0分)</div>""", unsafe_allow_html=True)
+st.markdown("""<div class="kpi-card"><b>標準：</b>≥95% (8分) | 90-94.9% (6分) | 85-89.9% (4分) | 80-84.9% (2分) | <80% (0分)</div>""", unsafe_allow_html=True)
 v_calls = st.number_input("有效緊急聯絡總數 (次)", min_value=0, value=0, step=1, key="v_calls")
 o_calls = st.number_input("準時回覆次數 (次)", min_value=0, value=0, step=1, key="o_calls")
 rate_1_1 = (o_calls / v_calls * 100) if v_calls > 0 else 0.0
@@ -61,7 +62,7 @@ st.info(f"📊 準時率：**{rate_1_1:.1f}%** | 💡 即時得分：**{score_1_
 st.markdown("---")
 # 1.2
 st.markdown("#### 1.2 開工、異常及收工匯報完整率 (上限 8 分)")
-st.markdown("""<div class="kpi-card"><b>標準：</b>100% (8分) | 95-99% (6分) | 90-94% (4分) | 80-89% (2分) | <80% (0分)</div>""", unsafe_allow_html=True)
+st.markdown("""<div class="kpi-card"><b>標準：</b>100% (8分) | 95-99.9% (6分) | 90-94.9% (4分) | 80-89.9% (2分) | <80% (0分)</div>""", unsafe_allow_html=True)
 r_tot = st.number_input("應提交匯報總數", min_value=0, value=0, step=1, key="r_tot")
 r_ok = st.number_input("合規匯報數", min_value=0, value=0, step=1, key="r_ok")
 rate_1_2 = (r_ok / r_tot * 100) if r_tot > 0 else 0.0
@@ -80,11 +81,11 @@ if t_tot == 0 and t_miss == 0: score_1_3 = 0.0
 st.info(f"💡 即時得分：**{score_1_3} / 4** 分")
 
 # ==================== DIMENSION 2 ====================
-st.markdown('<div class="section-header">三、 工程進度及技術執行（35%）</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-header">三、 工程進度及技術執行（權重 35%）</div>', unsafe_allow_html=True)
 
 # 2.1
 st.markdown("#### 2.1 里程碑按時完成率 (上限 15 分)")
-st.markdown("""<div class="kpi-card"><b>標準：</b>≥90% (15分) | 85-89% (12分) | 80-84% (9分) | 70-79% (5分) | <70% (0分)</div>""", unsafe_allow_html=True)
+st.markdown("""<div class="kpi-card"><b>標準：</b>≥90% (15分) | 85-89.9% (12分) | 80-84.9% (9分) | 70-79.9% (5分) | <70% (0分)</div>""", unsafe_allow_html=True)
 m_tot = st.number_input("當月到期節點總數", min_value=0, value=0, step=1, key="m_tot")
 m_ok = st.number_input("按時完成節點數", min_value=0, value=0, step=1, key="m_ok")
 rate_2_1 = (m_ok / m_tot * 100) if m_tot > 0 else 0.0
@@ -95,7 +96,7 @@ st.info(f"📊 完成率：**{rate_2_1:.1f}%** | 💡 即時得分：**{score_2_
 st.markdown("---")
 # 2.2
 st.markdown("#### 2.2 首次驗收通過率 (上限 12 分)")
-st.markdown("""<div class="kpi-card"><b>標準：</b>≥85% (12分) | 80-84% (9分) | 75-79% (6分) | 70-74% (3分) | <70% (0分)</div>""", unsafe_allow_html=True)
+st.markdown("""<div class="kpi-card"><b>標準：</b>≥85% (12分) | 80-84.9% (9分) | 75-79.9% (6分) | 70-74.9% (3分) | <70% (0分)</div>""", unsafe_allow_html=True)
 i_tot = st.number_input("提交檢驗批次總數", min_value=0, value=0, step=1, key="i_tot")
 i_ok = st.number_input("首次通過批次數", min_value=0, value=0, step=1, key="i_ok")
 rate_2_2 = (i_ok / i_tot * 100) if i_tot > 0 else 0.0
@@ -114,11 +115,11 @@ score_2_3 = 0.0 if e_maj >= 1 else (4.0 if (e_med == 1 or e_min >= 2) else (6.0 
 st.info(f"💡 即時得分：**{score_2_3} / 8** 分")
 
 # ==================== DIMENSION 3 ====================
-st.markdown('<div class="section-header">四、 物料及成本控制（15%）</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-header">四、 物料及成本控制（權重 15%）</div>', unsafe_allow_html=True)
 
 # 3.1
 st.markdown("#### 3.1 物料核對準確率 (上限 8 分)")
-st.markdown("""<div class="kpi-card"><b>標準：</b>≥98% (8分) | 95-97% (6分) | 92-94% (4分) | 90-91% (2分) | <90% (0分)</div>""", unsafe_allow_html=True)
+st.markdown("""<div class="kpi-card"><b>標準：</b>≥98% (8分) | 95-97.9% (6分) | 92-94.9% (4分) | 90-91.9% (2分) | <90% (0分)</div>""", unsafe_allow_html=True)
 mat_tot = st.number_input("應處理物料項目", min_value=0, value=0, step=1, key="mat_tot")
 mat_ok = st.number_input("準確項目", min_value=0, value=0, step=1, key="mat_ok")
 rate_3_1 = (mat_ok / mat_tot * 100) if mat_tot > 0 else 0.0
@@ -131,18 +132,18 @@ st.markdown("---")
 st.markdown("#### 3.2 可避免物料損耗率 (上限 7 分)")
 st.markdown("""<div class="kpi-card"><b>標準：</b>≤2% (7分) | >2-3% (5分) | >3-4% (3分) | >4-5% (1分) | >5% (0分)</div>""", unsafe_allow_html=True)
 mc = st.number_input("領用材料成本 (HK$)", min_value=0.0, value=0.0, step=1000.0, key="mc")
-lc = st.number_input("可避免損耗金額 (HK$)", min_value=0.0, value=0.0, step=500.0, key="lc")
+lc = st.number_input("可避免損耗金額 (HK$)", min_value=0.0, value=500.0, step=500.0, key="lc")
 rate_3_2 = (lc / mc * 100) if mc > 0 else 0.0
 score_3_2 = 7.0 if rate_3_2 <= 2.0 else (5.0 if rate_3_2 <= 3.0 else (3.0 if rate_3_2 <= 4.0 else (1.0 if rate_3_2 <= 5.0 else 0.0)))
 if mc == 0: score_3_2 = 0.0
 st.info(f"📊 損耗率：**{rate_3_2:.2f}%** | 💡 即時得分：**{score_3_2} / 7** 分")
 
 # ==================== DIMENSION 4 ====================
-st.markdown('<div class="section-header">五、 安全及團隊管理（30%）</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-header">五、 安全及團隊管理（權重 30%）</div>', unsafe_allow_html=True)
 
 # 4.1
 st.markdown("#### 4.1 安全巡查整改完成率 (上限 12 分)")
-st.markdown("""<div class="kpi-card"><b>標準：</b>≥95% (12分) | 90-94% (9分) | 85-89% (6分) | 80-84% (3分) | <80% (0分)</div>""", unsafe_allow_html=True)
+st.markdown("""<div class="kpi-card"><b>標準：</b>≥95% (12分) | 90-94.9% (9分) | 85-89.9% (6分) | 80-84.9% (3分) | <80% (0分)</div>""", unsafe_allow_html=True)
 s_tot = st.number_input("應完成項目數", min_value=0, value=0, step=1, key="s_tot")
 s_done = st.number_input("按時完成數", min_value=0, value=0, step=1, key="s_done")
 rate_4_1 = (s_done / s_tot * 100) if s_tot > 0 else 0.0
@@ -153,7 +154,7 @@ st.info(f"📊 完成率：**{rate_4_1:.1f}%** | 💡 即時得分：**{score_4_
 st.markdown("---")
 # 4.2
 st.markdown("#### 4.2 風險評估及事件呈報 (上限 10 分)")
-st.markdown("""<div class="kpi-card"><b>標準：</b>100% (10分) | 95-99% (8分) | 90-94% (6分) | 80-89% (3分) | <80% (0分)</div>""", unsafe_allow_html=True)
+st.markdown("""<div class="kpi-card"><b>標準：</b>100% (10分) | 95-99.9% (8分) | 90-94.9% (6分) | 80-89.9% (3分) | <80% (0分)</div>""", unsafe_allow_html=True)
 ra_tot = st.number_input("應完成項目數 ", min_value=0, value=0, step=1, key="ra_tot")
 ra_ok = st.number_input("合規完成數 ", min_value=0, value=0, step=1, key="ra_ok")
 rate_4_2 = (ra_ok / ra_tot * 100) if ra_tot > 0 else 0.0
