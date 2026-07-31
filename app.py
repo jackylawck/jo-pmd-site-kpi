@@ -132,7 +132,7 @@ st.markdown("---")
 st.markdown("#### 3.2 可避免物料損耗率 (上限 7 分)")
 st.markdown("""<div class="kpi-card"><b>標準：</b>≤2% (7分) | >2-3% (5分) | >3-4% (3分) | >4-5% (1分) | >5% (0分)</div>""", unsafe_allow_html=True)
 mc = st.number_input("領用材料成本 (HK$)", min_value=0.0, value=0.0, step=1000.0, key="mc")
-lc = st.number_input("可避免損耗金額 (HK$)", min_value=0.0, value=500.0, step=500.0, key="lc")
+lc = st.number_input("可避免損耗金額 (HK$)", min_value=0.0, value=0.0, step=500.0, key="lc")
 rate_3_2 = (lc / mc * 100) if mc > 0 else 0.0
 score_3_2 = 7.0 if rate_3_2 <= 2.0 else (5.0 if rate_3_2 <= 3.0 else (3.0 if rate_3_2 <= 4.0 else (1.0 if rate_3_2 <= 5.0 else 0.0)))
 if mc == 0: score_3_2 = 0.0
@@ -224,5 +224,11 @@ if st.button("📱 匯出 ISO 合規 PDF 考核報告", type="primary"):
         }
         pdf_file = build_pdf(data)
         st.success("✅ ISO 合規 PDF 報告已成功生成！")
+        
+        # 格式化下載檔名：[員工編號]_[員工姓名]_[考核日期].pdf
+        formatted_date = str(sign_date).replace("-", "")
+        safe_emp_id = emp_id.strip() if emp_id else "NO_ID"
+        out_filename = f"{safe_emp_id}_{emp_name}_{formatted_date}.pdf"
+        
         with open(pdf_file, "rb") as f:
-            st.download_button("📥 下載 ISO 合規 PDF 報告", f.read(), file_name=f"JO_ISO_KPI_{emp_name}_{eval_month}.pdf", mime="application/pdf")
+            st.download_button("📥 下載 ISO 合規 PDF 報告", f.read(), file_name=out_filename, mime="application/pdf")
