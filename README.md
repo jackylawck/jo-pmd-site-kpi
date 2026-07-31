@@ -37,8 +37,11 @@ jo-pmd-site-kpi/
 
 ## 🚀 部署至 Streamlit Cloud 指南
 將最新代碼 Commit & Push 至 GitHub 儲存庫 jackylawck/jo-pmd-site-kpi。
+
 前往 Streamlit Community Cloud 並登入。
+
 選擇 Repository jo-pmd-site-kpi、main 分支與主程式 app.py。
+
 點擊 Deploy! 即可完成發布。
 
 🔗 線上測試網址：https://jo-pmd-site-kpi.streamlit.app
