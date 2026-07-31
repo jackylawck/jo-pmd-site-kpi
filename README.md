@@ -33,6 +33,8 @@ jo-pmd-site-kpi/
 ├── requirements.txt      # Python 套件依賴清單 (reportlab, streamlit, pandas)
 └── README.md             # 專案說明與部署指南
 
+---
+
 ## 🚀 部署至 Streamlit Cloud 指南
 將最新代碼 Commit & Push 至 GitHub 儲存庫 jackylawck/jo-pmd-site-kpi。
 前往 Streamlit Community Cloud 並登入。
