@@ -1,6 +1,7 @@
-# jo-pmd-site-kpi | 東淦工程 PMD 地盤同事 KPI 績效評核系統
+# 🏗️ 東淦高級管工 KPI 考核系統 (jo-pmd-site-kpi)
 
-本專案專為 **東淦工程有限公司 (Jumbo Orient Contracting Limited)** 設計，旨在將《高級管工關鍵績效指標 (KPI) 考核協議書》數位化。系統支援 PMD (Project Management Department) 及地盤主管透過手機或電腦進行現場實測評核、動態即時算分，並自動產出符合 ISO 規範的標準 PDF 報告。
+An AI-Powered & ISO-Compliant KPI Performance Assessment System for Jumbo Orient Site Staff.  
+專為東淦工程有限公司 (Jumbo Orient Contracting Limited) 打造之 PMD 項目管理與地盤同事 KPI 績效評核系統。
 
 ---
 
